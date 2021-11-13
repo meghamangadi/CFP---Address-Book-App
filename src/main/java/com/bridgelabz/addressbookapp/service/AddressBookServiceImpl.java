@@ -51,8 +51,7 @@ public class AddressBookServiceImpl implements IAddressBookService {
 			address.setAddress(contactInfo.getAddress());
 			address.setCity(contactInfo.getCity());
 			address.setZip(contactInfo.getZip());		
-			addressBookRepository.save(address);
-			addressBookRepository.save(address);
+			addressBookRepository.save(address);			 
 			return new  Response(200 ,"Conatct Details Updated Succesfully..!!"); 
 		}
  		  return new  Response(500 ,"Fail to update the Contact Detail!"); 

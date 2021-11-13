@@ -1,5 +1,7 @@
 package com.bridgelabz.addressbookapp.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ public class AddressBookController {
 	private AddressBookServiceImpl addressBookServiceImpl;
 
 	@PostMapping("/savecontacts")
-	public ResponseEntity<Response> saveContacts(@RequestBody ContactInfo contactInfo) {
+	public ResponseEntity<Response> saveContacts(@Valid @RequestBody ContactInfo contactInfo) {
 		log.info("save method is called ");
 		Response response = addressBookServiceImpl.saveContacts(contactInfo);
 		return new ResponseEntity<>(response, HttpStatus.OK);
@@ -45,7 +47,7 @@ public class AddressBookController {
 	}
 
 	@PutMapping("/updateContactId")
-	public ResponseEntity<Response> updateContactByID(@RequestParam Long Id, @RequestBody ContactInfo contactInfo) {
+	public ResponseEntity<Response> updateContactByID(@RequestParam Long Id,@Valid  @RequestBody ContactInfo contactInfo) {
 		log.info("update contact details ");
 		Response response = addressBookServiceImpl.updateContactByID(Id, contactInfo);
 		return new ResponseEntity<>(response, HttpStatus.OK);
