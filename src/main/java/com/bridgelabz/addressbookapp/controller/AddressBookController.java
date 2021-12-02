@@ -5,12 +5,15 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bridgelabz.addressbookapp.model.ContactInfo;
@@ -21,6 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@CrossOrigin(allowedHeaders = "*", origins = "*")
+//@CrossOrigin 
+//@CrossOrigin("*")
+@RequestMapping("/addressbook")
 public class AddressBookController {
 
 	@Autowired
@@ -61,7 +68,7 @@ public class AddressBookController {
 	}
 
 	@DeleteMapping("/deleteContactId")
-	public ResponseEntity<Response> deleteContactByID(@RequestHeader(name = "token") String token) {
+	public ResponseEntity<Response> deleteContactByID(@PathVariable("token") String token) {
 		log.info("Deelet contact details ");
 		Response response = addressBookServiceImpl.deleteContactByID(token);
 		return new ResponseEntity<>(response, HttpStatus.OK);
